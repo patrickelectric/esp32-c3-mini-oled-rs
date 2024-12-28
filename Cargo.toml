@@ -40,6 +40,8 @@ smoltcp = { version = "0.11.0", default-features = false, features = [
     "socket-udp",
 ] }
 critical-section = "1.2.0"
+embedded-graphics = "0.8.1"
+sh1106 = "0.5.0"
 
 [profile.dev]
 # Rust debug is too slow.
