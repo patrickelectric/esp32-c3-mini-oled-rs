@@ -2,10 +2,12 @@
 #![no_main]
 
 use embedded_graphics::{
+    image::Image,
     pixelcolor::BinaryColor,
     prelude::*,
     primitives::{Line, PrimitiveStyle, PrimitiveStyleBuilder, Rectangle},
 };
+use embedded_icon::{mdi::size24px::Github, prelude::*};
 use esp_backtrace as _;
 use esp_hal::{
     delay::Delay,
@@ -76,6 +78,14 @@ fn main() -> ! {
     .into_styled(PrimitiveStyle::with_stroke(BinaryColor::On, 1))
     .draw(&mut display)
     .unwrap();
+
+    let github_icon = Github::new(BinaryColor::On);
+    Image::new(
+        &github_icon,
+        offset + real_display_size_as_point / 2 - Point::new(12, 12),
+    )
+    .draw(&mut display)
+    .ok();
     display.flush().unwrap();
 
     let mut led = Output::new(peripherals.GPIO8.degrade(), Level::Low);
